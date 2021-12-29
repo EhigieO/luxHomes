@@ -22,9 +22,15 @@ public class HomeController {
         return homeService.getAllHomes();
     }
 
-    @DeleteMapping(path = "/delete-home")
-    public String deleteHome(@RequestParam Long HomeId){
-        return homeService.deleteHome(HomeId);
+    @DeleteMapping(path = "/{homeId}")
+    public String deleteHome(@PathVariable Long homeId){
+        return homeService.deleteHome(homeId);
     }
 
+    @PutMapping(path = "/{homeId}")
+    public void updateStudent(@PathVariable("homeId") Long homeId,
+                              @RequestParam(required = false) Boolean availability,
+                              @RequestParam(required = false) Double rentPerYear){
+        homeService.updateHome(homeId, availability, rentPerYear);
+    }
 }

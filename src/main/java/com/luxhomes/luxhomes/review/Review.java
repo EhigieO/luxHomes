@@ -1,7 +1,8 @@
-package com.luxhomes.luxhomes.home;
+package com.luxhomes.luxhomes.review;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.luxhomes.luxhomes.home.Grade;
+import com.luxhomes.luxhomes.home.Home;
+import lombok.Data;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
@@ -11,8 +12,7 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Review {
     @Id
     @Column (nullable = false)

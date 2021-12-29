@@ -33,7 +33,7 @@ public class HomeService {
     }
 
     @Transactional
-    public void updateHome(Long homeId, Boolean availability, Double rentPerYear) {
+    public String updateHome(Long homeId, Boolean availability, Double rentPerYear) {
         Home home = homeRepository.findById(homeId).orElseThrow(() -> new IllegalStateException(
                 "home with id " + homeId +" does not exists"));
 
@@ -43,6 +43,7 @@ public class HomeService {
         if (rentPerYear != null && rentPerYear > 0 && !Objects.equals(home.getRentPerYear(), rentPerYear)){
             home.setRentPerYear(rentPerYear);
         }
+        return "homeUpdated";
     }
 }
 
