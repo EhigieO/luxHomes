@@ -14,7 +14,7 @@ public class HomeController {
 
     @PostMapping(path = "/add-home")
     public String addHome(@RequestBody Home home){
-        return homeService.addNewHome(home);
+        return homeService.saveHome(home);
     }
 
     @GetMapping(path = "/homes")
