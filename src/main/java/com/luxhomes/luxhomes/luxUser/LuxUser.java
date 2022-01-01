@@ -1,8 +1,6 @@
 package com.luxhomes.luxhomes.luxUser;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,10 +12,12 @@ import java.util.Collections;
 import java.util.Objects;
 
 
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
 @Entity
+@AllArgsConstructor
+@Builder
 public class LuxUser implements UserDetails{
     @Id
     @SequenceGenerator(
@@ -39,7 +39,9 @@ public class LuxUser implements UserDetails{
     @Enumerated(EnumType.STRING)
     private LuxUserRole luxUserRole;
 
+    @Builder.Default
     private Boolean locked = false;
+    @Builder.Default
     private Boolean enabled = false;
 
     public LuxUser(String firstName,
