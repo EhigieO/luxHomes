@@ -1,5 +1,6 @@
-package com.luxhomes.luxhomes.luxUser;
+package com.luxhomes.luxhomes.repositories;
 
+import com.luxhomes.luxhomes.models.LuxUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +16,7 @@ public interface LuxUserRepository extends JpaRepository<LuxUser, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE LuxUser a " +
-            "SET a.enabled = TRUE WHERE a.email = ?1")
-    int enableLuxUser(String email);
+    @Query("UPDATE LuxUser a SET a.enabled = true WHERE a.email = ?1")
+    void enableLuxUser(String email);
+
 }

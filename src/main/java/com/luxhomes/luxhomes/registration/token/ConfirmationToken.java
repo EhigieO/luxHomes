@@ -1,6 +1,6 @@
 package com.luxhomes.luxhomes.registration.token;
 
-import com.luxhomes.luxhomes.luxUser.LuxUser;
+import com.luxhomes.luxhomes.models.LuxUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

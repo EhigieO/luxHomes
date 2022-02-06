@@ -1,7 +1,7 @@
 package com.luxhomes.luxhomes.security.config;
 
 
-import com.luxhomes.luxhomes.luxUser.LuxUserService;
+import com.luxhomes.luxhomes.services.LuxUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/lux-homes/**")
+                .antMatchers("/api/lux/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()

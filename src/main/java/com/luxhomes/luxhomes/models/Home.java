@@ -1,6 +1,6 @@
-package com.luxhomes.luxhomes.home;
+package com.luxhomes.luxhomes.models;
 
-import com.luxhomes.luxhomes.review.Review;
+import com.luxhomes.luxhomes.models.Review;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,8 +25,7 @@ public class Home {
             strategy = GenerationType.SEQUENCE ,
             generator = "home_sequence"
     )
-    private Long id;
-    private String description;
+    private Long HomeId;
     @NotNull
     private String address;
     @OneToMany
@@ -39,8 +38,11 @@ public class Home {
     private Double rentPerYear;
     private Integer squareFeet;
     private LocalDate dateOfCreation;
+    @ManyToOne
+    @JoinColumn(name = "lux_user_id")
+    private LuxUser landlord;
 
-    public Home(String description,
+    public Home(LuxUser landlord,
                 String address,
                 Integer numberOfBeds,
                 Boolean furnished,
@@ -50,7 +52,7 @@ public class Home {
                 Double rentPerYear,
                 Integer squareFeet)
     {
-        this.description = description;
+        this.landlord = landlord;
         this.address = address;
         this.numberOfBeds = numberOfBeds;
         this.furnished = furnished;

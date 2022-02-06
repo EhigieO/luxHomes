@@ -2,8 +2,8 @@ package com.luxhomes.luxhomes.registration;
 
 
 import com.luxhomes.luxhomes.email.EmailSender;
-import com.luxhomes.luxhomes.luxUser.LuxUser;
-import com.luxhomes.luxhomes.luxUser.LuxUserService;
+import com.luxhomes.luxhomes.models.LuxUser;
+import com.luxhomes.luxhomes.services.LuxUserService;
 import com.luxhomes.luxhomes.registration.token.ConfirmationToken;
 import com.luxhomes.luxhomes.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class RegistrationService {
                         request.getLuxUserRole()
                 )
         );
-        String link = "http://localhost:8080/api/lux-homes/registration/confirm?token=" + token;
+        String link = "http://localhost:8080/api/lux/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
 
         return token;

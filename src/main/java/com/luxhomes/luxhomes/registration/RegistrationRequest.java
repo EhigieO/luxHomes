@@ -1,7 +1,7 @@
 package com.luxhomes.luxhomes.registration;
 
 
-import com.luxhomes.luxhomes.luxUser.LuxUserRole;
+import com.luxhomes.luxhomes.models.LuxUserRole;
 import lombok.*;
 
 @Getter

@@ -1,11 +1,10 @@
 package com.luxhomes.luxhomes.registration;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "api/lux-homes/registration")
+@RequestMapping(path = "api/lux/registration")
 @AllArgsConstructor
 public class RegistrationController {
 

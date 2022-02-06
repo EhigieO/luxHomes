@@ -1,7 +1,5 @@
-package com.luxhomes.luxhomes.review;
+package com.luxhomes.luxhomes.models;
 
-import com.luxhomes.luxhomes.home.Grade;
-import com.luxhomes.luxhomes.home.Home;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

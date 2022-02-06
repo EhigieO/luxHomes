@@ -1,7 +1,9 @@
-package com.luxhomes.luxhomes.home;
+package com.luxhomes.luxhomes.services;
 
-import com.luxhomes.luxhomes.review.Review;
-import com.luxhomes.luxhomes.review.ReviewService;
+import com.luxhomes.luxhomes.models.Home;
+import com.luxhomes.luxhomes.models.Review;
+import com.luxhomes.luxhomes.repositories.HomeRepository;
+import com.luxhomes.luxhomes.services.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

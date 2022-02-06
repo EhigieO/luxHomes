@@ -1,7 +1,9 @@
-package com.luxhomes.luxhomes.luxUser;
+package com.luxhomes.luxhomes.services;
 
+import com.luxhomes.luxhomes.models.LuxUser;
 import com.luxhomes.luxhomes.registration.token.ConfirmationToken;
 import com.luxhomes.luxhomes.registration.token.ConfirmationTokenService;
+import com.luxhomes.luxhomes.repositories.LuxUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -52,7 +56,11 @@ public class LuxUserService implements UserDetailsService {
         return token;
     }
 
-    public int enableLuxUser(String email) {
-        return luxUserRepository.enableLuxUser(email);
+    public void enableLuxUser(String email) {
+        luxUserRepository.enableLuxUser(email);
+    }
+    
+    public List<LuxUser> getAllUsers(){
+        return luxUserRepository.findAll();
     }
 }

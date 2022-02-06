@@ -1,21 +1,19 @@
-package com.luxhomes.luxhomes.home;
+package com.luxhomes.luxhomes.controllers;
 
+import com.luxhomes.luxhomes.dtos.addHome.AddHomeDto;
+import com.luxhomes.luxhomes.services.HomeService;
+import com.luxhomes.luxhomes.models.Home;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/lux-homes")
+@RequestMapping(path = "api/lux/")
 @AllArgsConstructor
 public class HomeController {
     private final HomeService homeService;
 
-
-    @PostMapping(path = "/add-home")
-    public String addHome(@RequestBody Home home){
-        return homeService.saveHome(home);
-    }
 
     @GetMapping(path = "/homes")
     public List<Home> homes(){
@@ -28,9 +26,12 @@ public class HomeController {
     }
 
     @PutMapping(path = "/{homeId}")
-    public void updateStudent(@PathVariable("homeId") Long homeId,
+    public void updateHome(@PathVariable("homeId") Long homeId,
                               @RequestParam(required = false) Boolean availability,
                               @RequestParam(required = false) Double rentPerYear){
         homeService.updateHome(homeId, availability, rentPerYear);
     }
+   // public String addHome(@RequestBody final AddHomeDto addHomeDto){
+       // return HomeService.saveAddHome(home);
+   // }
 }

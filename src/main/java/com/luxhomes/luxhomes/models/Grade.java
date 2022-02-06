@@ -1,4 +1,4 @@
-package com.luxhomes.luxhomes.home;
+package com.luxhomes.luxhomes.models;
 
 public enum Grade {
     EXCELLENT,

@@ -1,7 +1,7 @@
-package com.luxhomes.luxhomes.luxUser;
+package com.luxhomes.luxhomes.models;
 
+import com.sun.istack.NotNull;
 import lombok.*;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Objects;
-
 
 
 @Data
@@ -32,6 +30,8 @@ public class LuxUser implements UserDetails{
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true, nullable = false)
+    @NotNull
     private String email;
     private String password;
     private String phoneNumber;
@@ -65,21 +65,10 @@ public class LuxUser implements UserDetails{
 
         return Collections.singletonList(authority );
     }
-    public String getFirstNAme(){
-        return firstName;
-    }
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
     @Override
     public String getUsername() {
-        return email;
-    }
-
-    public String getLastName() {
-        return lastName;
+        return null;
     }
 
     @Override
@@ -100,18 +89,5 @@ public class LuxUser implements UserDetails{
     @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        LuxUser luxUser = (LuxUser) o;
-        return id != null && Objects.equals(id, luxUser.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 }

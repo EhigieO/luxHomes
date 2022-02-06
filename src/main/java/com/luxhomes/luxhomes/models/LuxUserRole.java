@@ -1,8 +1,8 @@
-package com.luxhomes.luxhomes.luxUser;
+package com.luxhomes.luxhomes.models;
 
 public enum LuxUserRole {
     LANDLORD,
     CLIENT,
-    LAWYER,
+    ADMIN,
     AGENT
 }

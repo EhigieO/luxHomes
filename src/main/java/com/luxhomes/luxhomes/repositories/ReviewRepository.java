@@ -1,5 +1,6 @@
-package com.luxhomes.luxhomes.review;
+package com.luxhomes.luxhomes.repositories;
 
+import com.luxhomes.luxhomes.models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
