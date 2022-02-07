@@ -63,4 +63,8 @@ public class LuxUserService implements UserDetailsService {
     public List<LuxUser> getAllUsers(){
         return luxUserRepository.findAll();
     }
+
+    public Optional<LuxUser> findUserByEmail(String email){
+        return luxUserRepository.findByEmail(email);
+    }
 }

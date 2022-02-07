@@ -1,9 +1,10 @@
 package com.luxhomes.luxhomes.services;
 
+import com.luxhomes.luxhomes.dtos.addHome.AddHomeDto;
 import com.luxhomes.luxhomes.models.Home;
+import com.luxhomes.luxhomes.models.LuxUser;
 import com.luxhomes.luxhomes.models.Review;
 import com.luxhomes.luxhomes.repositories.HomeRepository;
-import com.luxhomes.luxhomes.services.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class HomeService {
 
     private final ReviewService reviewService;
     private final HomeRepository homeRepository;
+    private final LuxUserService userService;
 
 
     public List<Home> getAllHomes() {
@@ -29,7 +31,8 @@ public class HomeService {
         Optional<Home> home = homeRepository.findHomeById(homeId);
         return home.orElse(null);
     }
-    public String saveHome(Home home) {
+    public String saveHome(AddHomeDto addHome) {
+        Home home = addHome(addHome);
         homeRepository.save(home);
         return "home saved";
     }
@@ -60,9 +63,21 @@ public class HomeService {
         Home home = findHomeById(homeId);
         if (home == null) throw new NoSuchElementException("Home does not exist");
         reviewService.addReview(review);
-        home.getReviews().add(review);
-        saveHome(home);
+        home.setReviews(review);
         return "home review added";
+    }
+
+    public Home addHome(AddHomeDto addHome){
+        Optional<LuxUser> user = userService.findUserByEmail(addHome.getEmail());
+        LuxUser landlord = user.get();
+        return new Home(landlord,
+                addHome.getAddress(),
+                addHome.getNumberOfBeds(),
+                addHome.getFurnished(),
+                addHome.getNumberOfToilets(),
+                addHome.getVisitorsToilet(),
+                addHome.getRentPerYear(),
+                addHome.getSquareFeet());
     }
 }
 

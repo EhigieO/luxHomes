@@ -2,6 +2,7 @@ package com.luxhomes.luxhomes.models;
 
 import com.luxhomes.luxhomes.models.Review;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Home {
     @Id
     @SequenceGenerator(
@@ -46,7 +48,6 @@ public class Home {
                 String address,
                 Integer numberOfBeds,
                 Boolean furnished,
-                Boolean availability,
                 Integer numberOfToilets,
                 Boolean visitorsToilet,
                 Double rentPerYear,
@@ -56,11 +57,14 @@ public class Home {
         this.address = address;
         this.numberOfBeds = numberOfBeds;
         this.furnished = furnished;
-        this.availability = availability;
         this.numberOfToilets = numberOfToilets;
         this.visitorsToilet = visitorsToilet;
         this.rentPerYear = rentPerYear;
         this.squareFeet = squareFeet;
+    }
+
+    public void setReviews(Review review) {
+        this.reviews.add(review);
     }
 }
 
