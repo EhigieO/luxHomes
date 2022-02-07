@@ -28,15 +28,16 @@ public class RegistrationService {
         }
 
         String token = luxUserService.signUpUser(
-                new LuxUser(
-                        request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPhoneNumber(),
-                        request.getPassword(),
-                        request.getLuxUserRole()
-                )
-        );
+                LuxUser.builder()
+                        .firstName(request.getFirstName())
+                        .lastName(request.getLastName())
+                        .email(request.getEmail())
+                        .phoneNumber(request.getPassword())
+                        .password(request.getPassword())
+                        .luxUserRole(request.getLuxUserRole())
+                        .build()
+                );
+
         String link = "http://localhost:8080/api/lux/registration/confirm?token=" + token;
         emailSender.send(request.getEmail(), buildEmail(request.getFirstName(), link));
 

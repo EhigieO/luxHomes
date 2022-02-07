@@ -31,7 +31,8 @@ public class HomeController {
                               @RequestParam(required = false) Double rentPerYear){
         homeService.updateHome(homeId, availability, rentPerYear);
     }
-   // public String addHome(@RequestBody final AddHomeDto addHomeDto){
-       // return HomeService.saveAddHome(home);
-   // }
+    @PostMapping(path = "/home/add_new_home")
+    public String addHome(@RequestBody final AddHomeDto addHomeDto){
+        return homeService.saveHome(addHomeDto);
+    }
 }

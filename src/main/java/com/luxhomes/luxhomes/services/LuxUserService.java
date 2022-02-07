@@ -67,4 +67,12 @@ public class LuxUserService implements UserDetailsService {
     public Optional<LuxUser> findUserByEmail(String email){
         return luxUserRepository.findByEmail(email);
     }
+
+    public String deleteUser(Long userId) {
+        if (luxUserRepository.findById(userId).isPresent()) {
+            luxUserRepository.deleteById(userId);
+            return "User deleted succesfully";
+        }
+        return "user not found";
+    }
 }

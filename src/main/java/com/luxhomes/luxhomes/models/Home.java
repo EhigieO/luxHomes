@@ -1,6 +1,5 @@
 package com.luxhomes.luxhomes.models;
 
-import com.luxhomes.luxhomes.models.Review;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
