@@ -1,10 +1,12 @@
 package com.luxhomes.luxhomes.services;
 
+import com.luxhomes.luxhomes.exceptions.UserNotFoundException;
 import com.luxhomes.luxhomes.models.LuxUser;
 import com.luxhomes.luxhomes.registration.token.ConfirmationToken;
 import com.luxhomes.luxhomes.registration.token.ConfirmationTokenService;
 import com.luxhomes.luxhomes.repositories.LuxUserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,25 +37,27 @@ public class LuxUserService implements UserDetailsService {
         boolean userExits = luxUserRepository.findByEmail(luxUser.getEmail())
                 .isPresent();
 
-        if(userExits){
-            throw new IllegalStateException("email already taken");
+        if(!userExits){
+            String encodedPassword = bCryptPasswordEncoder.encode(luxUser.getPassword());
+
+            luxUser.setPassword(encodedPassword);
+
+            luxUserRepository.save(luxUser);
+
+            String token = UUID.randomUUID().toString();
+            ConfirmationToken confirmationToken = new ConfirmationToken(
+                    token,
+                    LocalDateTime.now(),
+                    LocalDateTime.now().plusMinutes(15),
+                    luxUser
+            );
+
+            confirmationTokenService.saveConfirmationToken(confirmationToken);
+            return token;
+        } else
+        {
+            throw new DataIntegrityViolationException("email already taken");
         }
-        String encodedPassword = bCryptPasswordEncoder.encode(luxUser.getPassword());
-
-        luxUser.setPassword(encodedPassword);
-
-        luxUserRepository.save(luxUser);
-
-        String token = UUID.randomUUID().toString();
-        ConfirmationToken confirmationToken = new ConfirmationToken(
-                token,
-                LocalDateTime.now(),
-                LocalDateTime.now().plusMinutes(15),
-                luxUser
-        );
-
-        confirmationTokenService.saveConfirmationToken(confirmationToken);
-        return token;
     }
 
     public void enableLuxUser(String email) {
@@ -68,11 +72,12 @@ public class LuxUserService implements UserDetailsService {
         return luxUserRepository.findByEmail(email);
     }
 
-    public String deleteUser(Long userId) {
+    public String deleteUser(Long userId) throws UserNotFoundException {
         if (luxUserRepository.findById(userId).isPresent()) {
             luxUserRepository.deleteById(userId);
-            return "User deleted succesfully";
+            return "User deleted successfully";
+        } else {
+            throw new UserNotFoundException("User with ID: " + userId +" not found");
         }
-        return "user not found";
     }
 }

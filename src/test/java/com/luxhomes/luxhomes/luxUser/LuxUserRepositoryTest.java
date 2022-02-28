@@ -32,6 +32,7 @@ class LuxUserRepositoryTest {
 
     @AfterEach
     void tearDown() {
+
     }
 
     @Test
@@ -47,14 +48,14 @@ class LuxUserRepositoryTest {
 
         log.info("Before saving ->{}", luxUser);
         assertThat(luxUser.getId()).isNull();
-        luxUserRepository.save(luxUser);
+        userService.signUpUser(luxUser);
         log.info("After saving -> {}", luxUser);
         assertThat(luxUser.getId()).isNotNull();
     }
 
     @Test
-            void testUserIsCreatedUniquely(){
-    LuxUser luxUser = LuxUser.builder()
+    void testUserIsCreatedUniquely(){
+        LuxUser luxUser = LuxUser.builder()
             .firstName("Sandra")
             .lastName("Oluwatobi")
             .email("Sandie@gmail.com")
@@ -65,7 +66,7 @@ class LuxUserRepositoryTest {
 
         log.info("Before saving ->{}", luxUser);
     assertThat(luxUser.getId()).isNull();
-        luxUserRepository.save(luxUser);
+        userService.signUpUser(luxUser);
         log.info("After saving -> {}", luxUser);
     assertThat(luxUser.getId()).isNotNull();
 
@@ -77,8 +78,7 @@ class LuxUserRepositoryTest {
                 .password("sunny2")
                 .luxUserRole(LANDLORD)
                 .build();
-
-        assertThrows(DataIntegrityViolationException.class, () -> luxUserRepository.save(luxUser2));
+        assertThrows(DataIntegrityViolationException.class, () -> userService.signUpUser(luxUser2));
         log.info("after saving -> {}", luxUser2);
 }
     @Test
@@ -93,8 +93,9 @@ class LuxUserRepositoryTest {
                 .build();
 
         log.info("Before saving ->{}", luxUser);
-        luxUserRepository.save(luxUser);
-        Optional<LuxUser> savedUser = luxUserRepository.findByEmail(luxUser.getEmail());
+//        luxUserRepository.save(luxUser);
+        userService.signUpUser(luxUser);
+        Optional<LuxUser> savedUser = userService.findUserByEmail(luxUser.getEmail());
         assertEquals(savedUser.get().getFirstName(), luxUser.getFirstName());
     }
 

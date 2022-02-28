@@ -31,10 +31,22 @@ public class HomeService {
         Optional<Home> home = homeRepository.findHomeById(homeId);
         return home.orElse(null);
     }
-    public String saveHome(AddHomeDto addHome) {
-        Home home = addHome(addHome);
-        homeRepository.save(home);
-        return "home saved";
+    public String addNewHome(AddHomeDto addHome) {
+        Optional<LuxUser> user = userService.findUserByEmail(addHome.getEmail());
+        if (user.isPresent()) {
+            LuxUser landlord = user.get();
+            Home home = new Home(landlord,
+                    addHome.getAddress(),
+                    addHome.getNumberOfBeds(),
+                    addHome.getFurnished(),
+                    addHome.getNumberOfToilets(),
+                    addHome.getVisitorsToilet(),
+                    addHome.getRentPerYear(),
+                    addHome.getSquareFeet());
+            homeRepository.save(home);
+            return "home saved";
+        }
+        return "not a valid user";
     }
 
     public String deleteHome(Long homeId) {
@@ -67,17 +79,5 @@ public class HomeService {
         return "home review added";
     }
 
-    public Home addHome(AddHomeDto addHome){
-        Optional<LuxUser> user = userService.findUserByEmail(addHome.getEmail());
-        LuxUser landlord = user.get();
-        return new Home(landlord,
-                addHome.getAddress(),
-                addHome.getNumberOfBeds(),
-                addHome.getFurnished(),
-                addHome.getNumberOfToilets(),
-                addHome.getVisitorsToilet(),
-                addHome.getRentPerYear(),
-                addHome.getSquareFeet());
-    }
 }
 

@@ -33,6 +33,6 @@ public class HomeController {
     }
     @PostMapping(path = "/home/add_new_home")
     public String addHome(@RequestBody final AddHomeDto addHomeDto){
-        return homeService.saveHome(addHomeDto);
+        return homeService.addNewHome(addHomeDto);
     }
 }

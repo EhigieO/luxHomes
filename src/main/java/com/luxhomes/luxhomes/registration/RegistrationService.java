@@ -32,7 +32,7 @@ public class RegistrationService {
                         .firstName(request.getFirstName())
                         .lastName(request.getLastName())
                         .email(request.getEmail())
-                        .phoneNumber(request.getPassword())
+                        .phoneNumber(request.getPhoneNumber())
                         .password(request.getPassword())
                         .luxUserRole(request.getLuxUserRole())
                         .build()

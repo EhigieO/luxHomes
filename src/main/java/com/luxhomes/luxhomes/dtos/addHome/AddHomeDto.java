@@ -15,5 +15,5 @@ public class AddHomeDto {
     private Boolean visitorsToilet;
     private Double rentPerYear;
     private Integer squareFeet;
-    private String Email;
+    private String email;
 }

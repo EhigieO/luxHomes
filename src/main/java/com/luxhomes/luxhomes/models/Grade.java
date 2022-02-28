@@ -1,8 +1,9 @@
 package com.luxhomes.luxhomes.models;
 
 public enum Grade {
-    EXCELLENT,
-    GOOD,
-    BAD,
-    VERY_BAD,
+    ONE_STAR,
+    TWO_STAR,
+    THREE_STAR,
+    FOUR_STAR,
+    FIVE_STAR
 }
